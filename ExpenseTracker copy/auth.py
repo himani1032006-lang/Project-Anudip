@@ -9,6 +9,7 @@ logged-in user's/admin's ID (or None if login fails).
 """
 
 import psycopg2
+import getpass
 from utils import is_valid_email, is_valid_phone, is_valid_password
 
 
@@ -39,7 +40,7 @@ class Authentication:
             print("Invalid phone number. Use digits only (7-15 digits).")
             return
 
-        password = input("Enter a password (min 4 characters, no spaces): ").strip()
+        password = getpass.getpass("Enter a password (min 4 characters, no spaces): ").strip()
         if not is_valid_password(password):
             print("Password does not meet requirements.")
             return
@@ -69,7 +70,7 @@ class Authentication:
         """Log in a user with email and password. Returns user_id or None."""
         print("\n--- User Login ---")
         email = input("Enter your email: ").strip()
-        password = input("Enter your password: ").strip()
+        password = getpass.getpass("Enter your password: ").strip()
 
         try:
             self.db.cursor.execute(
@@ -95,7 +96,7 @@ class Authentication:
         """Log in an admin with username and password. Returns admin_id or None."""
         print("\n--- Admin Login ---")
         username = input("Enter admin username: ").strip()
-        password = input("Enter admin password: ").strip()
+        password = getpass.getpass("Enter admin password: ").strip()
 
         try:
             self.db.cursor.execute(
@@ -115,3 +116,4 @@ class Authentication:
         except psycopg2.Error as error:
             print(f"Error during admin login: {error}")
             return None
+        

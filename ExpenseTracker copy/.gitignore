@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+env/
+
+# Sensitive local config (contains real DB credentials)
+config.py
+
+# OS files
+.DS_Store
